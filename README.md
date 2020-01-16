@@ -16,4 +16,6 @@ https://hdb-wireframes.surge.sh
 
 **Milestone 2 - User Flow**
 
+[Link to Figma File](https://www.figma.com/file/Rd83WQavll1t4gA3pUpXGJ/Hearthstone-Deck-Builder-User-Flow?node-id=26%3A207)
+
 ![Hearthstone Deck Builder - User Flow](/user-flow/User-Flow.png?raw=true)
