@@ -17,7 +17,3 @@
         -   Card list constains list of added cards which are buttons, when you click the card it'll decrement / remove the card
 -   View Deck Page ✅
     Will display deck cards, name, description, class, as well as meta information (eg. mana curve, distribution of card types - minions vs. spells, cost in dust, etc.)
-
-# User Flows
-
-![Hearthstone Deck Builder - User Flow](/user-flow/User-Flow.png?raw=true)

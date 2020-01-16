@@ -13,3 +13,7 @@ Full Stack JavaScript app (built with React, Node/Express, and Postgres).
 Created static HTML wireframes of the most essential pages. Deployed to Surge.
 
 https://hdb-wireframes.surge.sh
+
+**Milestone 2 - User Flow**
+
+![Hearthstone Deck Builder - User Flow](/user-flow/User-Flow.png?raw=true)
