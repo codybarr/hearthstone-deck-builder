@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>View Card { cardName } - Hearthstone Deck Builder</title>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://unpkg.com/tailwindcss@1.1.4/dist/base.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="main.css" />
+	</head>
+	<body>
+		<nav>
+			<strong>Nav</strong>
+			<p>
+				<a href="/">Home</a> |
+				<a href="/register-login">Register / Login</a> |
+				<a href="/card">View Card</a> |
+				<a href="/create-deck">Create Deck</a> |
+				<a href="/view-deck">View Deck</a>
+			</p>
+		</nav>
+		<main class="card">
+			<h1>Card View: { cardName }</h1>
+			<p>[ card image will go here ]</p>
+			<br />
+			<p>[ card metadata will go here, eg. ]</p>
+			<ul>
+				<li>Set Name: Descent of Dragons</li>
+				<li>Card Type: Minion</li>
+				<li>Card Text</li>
+				<li>Rarity</li>
+				<li>Class</li>
+			</ul>
+		</main>
+		<footer>
+			<p>
+				Footer
+			</p>
+		</footer>
+	</body>
+</html>

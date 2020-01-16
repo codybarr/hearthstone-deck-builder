@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Create Deck - Hearthstone Deck Builder</title>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="https://unpkg.com/tailwindcss@1.1.4/dist/base.css"
+		/>
+		<link rel="stylesheet" type="text/css" href="main.css" />
+	</head>
+	<body>
+		<nav>
+			<strong>Nav</strong>
+			<p>
+				<a href="/">Home</a> |
+				<a href="/register-login">Register / Login</a> |
+				<a href="/card">View Card</a> |
+				<a href="/create-deck">Create Deck</a> |
+				<a href="/view-deck">View Deck</a>
+			</p>
+		</nav>
+		<main class="create-deck">
+			<div class="create-deck-inner">
+				<h1>Create Deck</h1>
+				<form id="cardSearch">
+					<input
+						aria-label="Search for card"
+						type="text"
+						placeholder="Search for card"
+					/>
+					<div>
+						<input type="submit" value="Search" />
+					</div>
+					<div id="cardSearchResults">
+						<p>[ card search results go here ]</p>
+					</div>
+				</form>
+				<hr />
+				<form>
+					<fieldset>
+						<legend>Deck Class</legend>
+						<div class="deckClass-radios">
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Mage"
+									value="MAGE"
+									id="deckClass-mage"
+									checked
+								/>
+								<label for="deckClass-mage">Mage</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="WARRIOR"
+									id="deckClass-warrior"
+								/>
+								<label for="deckClass-warrior">Warrior</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="SHAMAN"
+									id="deckClass-shaman"
+								/>
+								<label for="deckClass-shaman">Shaman</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="WARLOCK"
+									id="deckClass-warlock"
+								/>
+								<label for="deckClass-warlock">Warlock</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="PRIEST"
+									id="deckClass-priest"
+								/>
+								<label for="deckClass-priest">Priest</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="DRUID"
+									id="deckClass-druid"
+								/>
+								<label for="deckClass-druid">Druid</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="ROGUE"
+									id="deckClass-rogue"
+								/>
+								<label for="deckClass-rogue">Rogue</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="HUNTER"
+									id="deckClass-hunter"
+								/>
+								<label for="deckClass-hunter">Hunter</label>
+							</div>
+							<div>
+								<input
+									type="radio"
+									name="deckClass"
+									aria-label="Deck Class"
+									value="PALADIN"
+									id="deckClass-paladin"
+								/>
+								<label for="deckClass-paladin">Paladin</label>
+							</div>
+						</div>
+					</fieldset>
+					<div>
+						<input
+							aria-label="Deck Name"
+							type="text"
+							placeholder="Deck Name"
+						/>
+					</div>
+					<div>
+						<textarea
+							aria-label="Deck Description"
+							placeholder="Deck Description"
+						></textarea>
+					</div>
+					<div>
+						<p>[ cards added to deck go here ]</p>
+					</div>
+					<div><input type="submit" value="Create Deck" /></div>
+				</form>
+			</div>
+		</main>
+		<footer>
+			<p>
+				Footer
+			</p>
+		</footer>
+	</body>
+</html>

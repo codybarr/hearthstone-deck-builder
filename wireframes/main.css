@@ -1,0 +1,116 @@
+html {
+	font-size: 1.125rem; // tailwind .text-lg
+}
+
+h1 {
+	font-size: 2.25rem; // tailwind .text-4xl
+}
+
+h2 {
+	font-size: 1.875rem; /* tailwind .text-3xl */
+}
+
+h3 {
+	font-size: 1.5rem; /* tailwind .text-2xl */
+}
+
+a,
+a:link {
+	color: white;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+header,
+nav,
+main,
+section,
+footer {
+	padding: 1.5rem; /* tailwind .p-6 */
+}
+
+nav,
+footer {
+	text-align: center;
+}
+
+nav {
+	color: white;
+	background-color: #666666;
+}
+
+section {
+	min-height: 200px;
+	background-color: #bbbbbb;
+}
+
+section:nth-child(even) {
+	background-color: #dddddd;
+}
+
+ul {
+	list-style-type: disc;
+	padding-left: 1.25rem;
+}
+
+* + ul {
+	margin-top: 1rem;
+}
+
+.register,
+.create-deck,
+.view-deck {
+	background-color: #bbbbbb;
+}
+
+.register-inner,
+.create-deck-inner,
+.view-deck-inner {
+	max-width: 960px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+form {
+	display: inline-flex;
+	flex-direction: column;
+}
+
+form input[type='text'],
+form input[type='email'],
+form input[type='password'],
+form input[type='submit'],
+form textarea {
+	margin-top: 0.5rem;
+	padding: 0.5rem;
+	display: block;
+}
+
+hr {
+	margin: 1.5rem 0;
+}
+
+.deckClass-radios,
+.deckClass-radios > div {
+	display: flex;
+	align-items: center;
+}
+
+.deckClass-radios {
+	flex-wrap: wrap;
+}
+
+.deckClass-radios label {
+	margin-left: 0.5rem;
+}
+
+.deckClass-radios > div:not(:first-child) {
+	margin-left: 1rem;
+}
+
+p:not(:first-child) {
+	margin-top: 1rem;
+}

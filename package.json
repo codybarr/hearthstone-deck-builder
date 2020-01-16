@@ -1,0 +1,14 @@
+{
+	"name": "hearthstone-deck-builder",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "git@github.com:codybarr/hearthstone-deck-builder.git",
+	"author": "Cody Barr <cody.barr@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"deploy:wireframes": "surge wireframes/ hdb-wireframes.surge.sh"
+	},
+	"devDependencies": {
+		"surge": "^0.21.3"
+	}
+}
