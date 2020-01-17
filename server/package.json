@@ -1,0 +1,23 @@
+{
+	"name": "hearthstone-deck-builder-api",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"migrate": "knex migrate:latest",
+		"migrate:rollback": "knex migrate:rollback --all",
+		"migrate:make": "knex migrate:make",
+		"migrate:test": "env NODE_ENV=test knex migrate:latest",
+		"seed:cards": "knex seed:run --specific=seed_cards.js"
+	},
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"knex": "^0.20.8",
+		"pg": "^7.17.1",
+		"xss": "^1.0.6"
+	},
+	"devDependencies": {
+		"lodash": "^4.17.15"
+	}
+}
