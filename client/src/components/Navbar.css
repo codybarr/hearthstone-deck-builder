@@ -1,0 +1,36 @@
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	background-color: #666666;
+	padding: 0.5rem 1rem;
+}
+
+nav .logo-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+nav .logo {
+	width: 4rem;
+	height: 4rem;
+}
+
+nav .logo-wrapper strong {
+	margin-left: 1rem;
+}
+
+nav ul {
+	display: flex;
+	margin-top: 0;
+}
+
+nav ul li {
+	padding-right: 1rem;
+}
+
+nav a,
+nav a:link {
+	color: white;
+}
