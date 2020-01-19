@@ -63,9 +63,7 @@ function cardMapper(card) {
 	}
 }
 
-let firstTenCards = card_data
-	.slice(0, 30)
-	.map(cardMapper)
-	.map(card => card.mechanics)
+let firstTenCards = card_data.slice(0, 30).map(cardMapper)
+// .map(card => card.mechanics)
 
 firstTenCards.forEach(card => console.log(card))

@@ -4,6 +4,7 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
+		"dev": "nodemon ./src/server.js",
 		"migrate": "knex migrate:latest",
 		"migrate:rollback": "knex migrate:rollback --all",
 		"migrate:make": "knex migrate:make",
@@ -11,13 +12,17 @@
 		"seed:cards": "knex seed:run --specific=seed_cards.js"
 	},
 	"dependencies": {
+		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"helmet": "^3.21.2",
 		"knex": "^0.20.8",
+		"morgan": "^1.9.1",
 		"pg": "^7.17.1",
 		"xss": "^1.0.6"
 	},
 	"devDependencies": {
-		"lodash": "^4.17.15"
+		"lodash": "^4.17.15",
+		"nodemon": "^2.0.2"
 	}
 }

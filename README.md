@@ -6,6 +6,22 @@ Visual deck builder tool for the popular digital strategy card game Hearthstone!
 
 Full Stack JavaScript app (built with React, Node/Express, and Postgres).
 
+## Development
+
+**Client**
+
+`cd client && yarn start`
+
+**Server**
+
+`cd server && yarn dev`
+
+## Deployment
+
+**Client**
+
+`cd client && yarn deploy`
+
 ## Project History
 
 **Milestone 1 - Wireframes**
