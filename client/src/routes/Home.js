@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Home() {
 	return (
@@ -11,9 +12,13 @@ function Home() {
 					</span>{' '}
 					- Hearthstone Deck Builder!
 				</h1>
-				<a href="/demo">Check out the Demo</a>
+				<p className="content">
+					Hi there, thanks for visiting my site. If you'd like to
+					learn how to use the app, please{' '}
+					<Link to="/demo">visit the demo</Link>
+				</p>
 			</header>
-			<section>
+			<section className="content">
 				<h2>Create Your Own Decks</h2>
 				<p>
 					Use our custom designed deck builder to craft your

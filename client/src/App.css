@@ -2,6 +2,12 @@ html {
 	font-size: 1.125rem; /* tailwind .text-lg */
 }
 
+h1,
+h2,
+h3 {
+	margin-bottom: 1.5rem;
+}
+
 h1 {
 	font-size: 2.25rem; /* tailwind .text-4xl */
 }
@@ -14,12 +20,12 @@ h3 {
 	font-size: 1.5rem; /* tailwind .text-2xl */
 }
 
-a,
-a:link {
+.content a,
+.content a:link {
 	color: blue;
 }
 
-a:hover {
+.content a:hover {
 	text-decoration: underline;
 }
 
@@ -49,7 +55,7 @@ section:nth-child(even) {
 }
 
 * + ul {
-	margin-top: 1rem;
+	margin: 1rem 0;
 }
 
 .register,
@@ -87,24 +93,30 @@ hr {
 	margin: 1.5rem 0;
 }
 
-.deckClass-radios,
-.deckClass-radios > div {
-	display: flex;
-	align-items: center;
-}
-
-.deckClass-radios {
-	flex-wrap: wrap;
-}
-
-.deckClass-radios label {
-	margin-left: 0.5rem;
-}
-
-.deckClass-radios > div:not(:first-child) {
-	margin-left: 1rem;
-}
-
-p:not(:first-child) {
+div.content p:not(:first-child) {
 	margin-top: 1rem;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex > * {
+	flex: 1;
+	margin-top: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+	.flex {
+		flex-direction: row;
+	}
+
+	.flex > * {
+		margin-top: 0;
+	}
+
+	.flex > *:not(:first-child) {
+		margin-left: 1rem;
+	}
 }

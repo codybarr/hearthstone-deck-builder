@@ -17,6 +17,7 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 #cardSearchResults img {
@@ -27,4 +28,22 @@
 
 #cardSearchResults img:hover {
 	transform: scale(1.2);
+}
+
+.deckClass-radios,
+.deckClass-radios > div {
+	display: flex;
+	align-items: center;
+}
+
+.deckClass-radios {
+	flex-wrap: wrap;
+}
+
+.deckClass-radios label {
+	margin-left: 0.5rem;
+}
+
+.deckClass-radios > div {
+	margin-right: 1rem;
 }

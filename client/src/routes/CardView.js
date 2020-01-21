@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { cards as all_cards } from '../data/cards.fixtures'
+import all_cards from '../data/cards.fixture'
 
 function Card() {
 	let { card_id } = useParams()
@@ -17,12 +17,14 @@ function Card() {
 			<h1>
 				Card View: {card.name} | card.id: {card_id}{' '}
 			</h1>
-			<img
-				key={card.dbf_id}
-				width="200"
-				alt={`${card.name}`}
-				src={`https://s3.wasabisys.com/hearthstone/${card.dbf_id}.png`}
-			/>
+			{card.dbf_id && (
+				<img
+					key={card.dbf_id}
+					width="200"
+					alt={`${card.name}`}
+					src={`https://s3.wasabisys.com/hearthstone/${card.dbf_id}.png`}
+				/>
+			)}
 			<h2>Card Info</h2>
 			<ul>
 				<li>Set Name: {card.set}</li>

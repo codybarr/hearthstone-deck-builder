@@ -1,10 +1,15 @@
 import React from 'react'
-import { cards as card_data } from '../../data/cards.fixtures'
+import card_data from '../../data/cards.fixture'
 // import _ from 'lodash'
+import { withRouter } from 'react-router-dom'
+
+import UserContext from '../../Context'
 
 import './DeckCreate.css'
 
-export default class DeckCreate extends React.Component {
+class DeckCreate extends React.Component {
+	static contextType = UserContext
+
 	state = {
 		cardSearchQuery: '',
 		filteredCards: [],
@@ -12,10 +17,19 @@ export default class DeckCreate extends React.Component {
 		deckName: '',
 		deckDescription: '',
 		deckCards: [],
+		totalCards: 0,
 	}
 
 	componentDidMount() {
 		this.setState({ filteredCards: card_data })
+	}
+
+	updateTotalCards() {
+		const newTotalCards = this.state.deckCards.reduce((prev, curr) => {
+			return (prev += curr.quantity)
+		}, 0)
+		console.log('total updated: ', newTotalCards)
+		this.setState({ totalCards: newTotalCards })
 	}
 
 	incrementCard(e, card) {
@@ -36,21 +50,26 @@ export default class DeckCreate extends React.Component {
 				alert('You can only have one of each legendary.')
 			} else {
 				currentDeckCards[existsIndex].quantity++
-				this.setState({ deckCards: [...currentDeckCards] })
+				this.setState({ deckCards: [...currentDeckCards] }, () =>
+					this.updateTotalCards()
+				)
 			}
 		} else {
 			// add
-			this.setState({
-				deckCards: [
-					...currentDeckCards,
-					{
-						dbf_id: card.dbf_id,
-						quantity: 1,
-						name: card.name,
-						rarity: card.rarity,
-					},
-				],
-			})
+			this.setState(
+				{
+					deckCards: [
+						...currentDeckCards,
+						{
+							dbf_id: card.dbf_id,
+							quantity: 1,
+							name: card.name,
+							rarity: card.rarity,
+						},
+					],
+				},
+				() => this.updateTotalCards()
+			)
 		}
 	}
 
@@ -69,17 +88,37 @@ export default class DeckCreate extends React.Component {
 			currentDeckCards.splice(indexOfCardToDecrement, 1) // !
 		}
 
-		this.setState({
-			deckCards: [...currentDeckCards],
-		})
+		this.setState(
+			{
+				deckCards: [...currentDeckCards],
+			},
+			() => this.updateTotalCards()
+		)
 	}
 
 	createDeck = e => {
 		e.preventDefault()
-		console.log('deck create form submitted')
+		const { history, match } = this.props
+		console.log({ history, match })
+		const { deckClass, deckName, deckDescription, deckCards } = this.state
+		const newDeck = {
+			hearthstoneClass: deckClass,
+			name: deckName,
+			description: deckDescription,
+			cards: deckCards,
+		}
 
-		/* VALIDATION */
+		/* VALIDATION - TODO */
 		// if sum of all cards is > 30
+
+		if (this.state.totalCards === 0) {
+			alert('you need to add at least one card!')
+			return
+		}
+
+		console.log('deck create form submitted', newDeck)
+		this.context.addUserDeck(newDeck)
+		this.props.history.push(`/user/${this.context.user.username}/decks`)
 	}
 
 	render() {
@@ -121,10 +160,10 @@ export default class DeckCreate extends React.Component {
 						aria-label={hClass}
 						value={hClass.toUpperCase()}
 						id={`deckClass-${hClass.toLowerCase()}`}
-						defaultChecked={hClass === 'Mage'}
 						onChange={e =>
 							this.setState({ deckClass: e.target.value })
 						}
+						required
 					/>
 					<label htmlFor={`deckClass-${hClass.toLowerCase()}`}>
 						{hClass}
@@ -143,20 +182,13 @@ export default class DeckCreate extends React.Component {
 			)
 		})
 
-		const totalCards = this.state.deckCards.reduce((prev, curr) => {
-			return (prev += curr.quantity)
-		}, 0)
-
 		return (
 			<main className="create-deck">
 				<div className="inner">
 					<section>
 						<h1>Create Deck</h1>
 						<h2>Find Cards</h2>
-						<form
-							id="cardSearch"
-							onSubmit={e => e.preventDefault()}
-						>
+						<form id="cardSearch" onSubmit={this.createDeck}>
 							<input
 								name="cardQuery"
 								aria-label="Search for card"
@@ -197,6 +229,8 @@ export default class DeckCreate extends React.Component {
 											deckName: e.target.value,
 										})
 									}
+									required
+									aria-required="true"
 								/>
 							</div>
 							<div>
@@ -210,15 +244,20 @@ export default class DeckCreate extends React.Component {
 											deckDescription: e.target.value,
 										})
 									}
+									required
+									aria-required="true"
 								></textarea>
 							</div>
 							<h3>Deck Cards</h3>
-							{this.state.deckCards.length > 0 && deckCardsHTML}
+							{this.state.deckCards.length > 0 && (
+								<ul>{deckCardsHTML}</ul>
+							)}
 							{this.state.deckCards.length === 0 && (
 								<p>No cards yet.</p>
 							)}
 							<p>
-								<strong>Total Cards:</strong> {totalCards} / 30
+								<strong>Total Cards:</strong>{' '}
+								{this.state.totalCards} / 30
 							</p>
 							<div>
 								<input type="submit" value="Create Deck" />
@@ -230,3 +269,5 @@ export default class DeckCreate extends React.Component {
 		)
 	}
 }
+
+export default withRouter(DeckCreate)

@@ -1,0 +1,72 @@
+.user-deck {
+	width: 100%;
+	padding-top: 1rem;
+	transform: translateY(0rem);
+	transition: 200ms all cubic-bezier(0, 0, 0.2, 1);
+	overflow: hidden;
+	align-items: stretch;
+	display: block;
+}
+
+.user-deck:hover {
+	transform: translateY(-1rem);
+}
+
+@media screen and (min-width: 768px) {
+	.user-deck {
+		width: 33.33%;
+		padding: 0 1rem 1rem 0;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.user-deck {
+		width: 25%;
+	}
+}
+
+.user-deck .deck-inner {
+	border-radius: 0.25rem;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+	padding: 1rem;
+	background-size: cover;
+	background-blend-mode: overlay;
+	background-color: #c7c7c7;
+	height: 100%;
+}
+
+.user-deck .deck-inner.warrior {
+	background-image: url('../../assets/images/heroes/WARRIOR.jpg');
+}
+
+.user-deck .deck-inner.mage {
+	background-image: url('../../assets/images/heroes/MAGE.jpg');
+}
+
+.user-deck .deck-inner.hunter {
+	background-image: url('../../assets/images/heroes/HUNTER.jpg');
+}
+
+.user-deck .deck-inner.warlock {
+	background-image: url('../../assets/images/heroes/WARLOCK.jpg');
+}
+
+.user-deck .deck-inner.rogue {
+	background-image: url('../../assets/images/heroes/ROGUE.jpg');
+}
+
+.user-deck .deck-inner.shaman {
+	background-image: url('../../assets/images/heroes/SHAMAN.jpg');
+}
+
+.user-deck .deck-inner.priest {
+	background-image: url('../../assets/images/heroes/PRIEST.jpg');
+}
+
+.user-deck .deck-inner.paladin {
+	background-image: url('../../assets/images/heroes/PALADIN.jpg');
+}
+
+.user-deck .deck-inner.druid {
+	background-image: url('../../assets/images/heroes/DRUID.jpg');
+}

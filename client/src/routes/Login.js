@@ -2,8 +2,8 @@ import React from 'react'
 
 function Login() {
 	return (
-		<main class="login">
-			<div class="login-inner">
+		<main className="login">
+			<div className="login-inner">
 				<h1>Login</h1>
 				<form>
 					<div>

@@ -2,8 +2,8 @@ import React from 'react'
 
 function Register() {
 	return (
-		<main class="register">
-			<div class="register-inner">
+		<main className="register">
+			<div className="register-inner">
 				<h1>Register</h1>
 				<form>
 					<div>

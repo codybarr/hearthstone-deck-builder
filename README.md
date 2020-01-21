@@ -41,3 +41,7 @@ https://hdb-wireframes.surge.sh
 Got a rough draft of the static client created. Most of the pages are built and everything except for the create deck submission logic is ready.
 
 Also built the GET endpoints for `/api/cards` and `/api/cards/:id`.
+
+**Milestone 3b - Fully functional Static Client (minus auth)**
+
+Finished building out the MVP features deck builder, etc. This version of the client is ready for user feedback.

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+	<symbol id="mana-crystal" viewBox="0 0 250 260">
+		<path d="M175 43.3975L225 130L175 216.603L75 216.603L25 130L75 43.3975L175 43.3975Z" />
+		<path d="M83 56H170L93 71L38 130.5L83 56Z" fill="white"/>
+	</symbol>
+</svg>

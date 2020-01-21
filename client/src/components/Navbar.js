@@ -21,10 +21,13 @@ function Navbar() {
 					<Link to="/register">Register</Link>
 				</li>
 				<li>
+					<Link to="/user/codybarr/decks">User Decks</Link>
+				</li>
+				<li>
 					<Link to="/card/23">View Card</Link>
 				</li>
 				<li>
-					<Link to="/deck/42">View Deck</Link>
+					<Link to="/deck/2">View Deck</Link>
 				</li>
 				<li>
 					<Link to="/decks/create">Create Deck</Link>
