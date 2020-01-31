@@ -29,10 +29,10 @@ class DeckCreate extends React.Component {
 	state = {
 		cardSearchQuery: '',
 		filteredCards: [],
-		// classSelected: false,
-		classSelected: true, // testing
-		// deckClass: '',
-		deckClass: 'PRIEST', // testing
+		classSelected: false,
+		// classSelected: true, // testing
+		deckClass: '',
+		// deckClass: 'PRIEST', // testing
 		deckName: '',
 		deckDescription: '',
 		deckCards: [],
