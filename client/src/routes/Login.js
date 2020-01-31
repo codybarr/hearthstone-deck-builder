@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './Login.module.css'
 
 function Login() {
 	return (
-		<main className="login">
+		<main className={styles.login}>
 			<div className="login-inner">
 				<h1>Login</h1>
 				<form>

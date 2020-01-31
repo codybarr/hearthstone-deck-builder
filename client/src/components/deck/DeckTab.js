@@ -1,10 +1,10 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import './DeckCard.css'
+import './DeckTab.css'
 
 import HearthstoneClassIcon from '../icons/HearthstoneClassIcon'
 
-function DeckCard({ deck }) {
+function DeckTab({ deck }) {
 	const history = useHistory()
 	return (
 		<article
@@ -26,4 +26,4 @@ function DeckCard({ deck }) {
 	)
 }
 
-export default DeckCard
+export default DeckTab

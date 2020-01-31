@@ -9,7 +9,8 @@
 		"migrate:rollback": "knex migrate:rollback --all",
 		"migrate:make": "knex migrate:make",
 		"migrate:test": "env NODE_ENV=test knex migrate:latest",
-		"seed:cards": "knex seed:run --specific=seed_cards.js"
+		"seed:cards": "knex seed:run --specific=seed_cards.js",
+		"start:postgres": "pg_ctl restart"
 	},
 	"dependencies": {
 		"cors": "^2.8.5",

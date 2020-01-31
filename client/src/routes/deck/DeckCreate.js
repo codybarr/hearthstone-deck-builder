@@ -1,11 +1,27 @@
 import React from 'react'
-import card_data from '../../data/cards.fixture'
-// import _ from 'lodash'
 import { withRouter } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
-import UserContext from '../../Context'
+import DeckCardList from '../../components/deck-create/DeckCardList'
+import UserContext from '../../context/Context'
 
 import './DeckCreate.css'
+import card_data from '../../data/cards.fixture'
+
+// imports all images in a directory
+function importAll(r) {
+	let images = {}
+	r.keys().forEach((item, index) => {
+		images[item.replace('./', '')] = r(item)
+	})
+	return images
+}
+
+const HERO_PORTRAITS = importAll(
+	require.context('../../assets/images/heroes/', false, /\.(png|jpe?g|svg)$/)
+)
 
 class DeckCreate extends React.Component {
 	static contextType = UserContext
@@ -13,7 +29,10 @@ class DeckCreate extends React.Component {
 	state = {
 		cardSearchQuery: '',
 		filteredCards: [],
-		deckClass: '',
+		// classSelected: false,
+		classSelected: true, // testing
+		// deckClass: '',
+		deckClass: 'PRIEST', // testing
 		deckName: '',
 		deckDescription: '',
 		deckCards: [],
@@ -24,6 +43,17 @@ class DeckCreate extends React.Component {
 		this.setState({ filteredCards: card_data })
 	}
 
+	selectClass(e) {
+		e.preventDefault()
+
+		this.setState({ classSelected: true }, () => {
+			this.notify({
+				type: toast.TYPE.SUCCESS,
+				message: `🚀 You selected the following class: ${this.state.deckClass}`,
+			})
+		})
+	}
+
 	updateTotalCards() {
 		const newTotalCards = this.state.deckCards.reduce((prev, curr) => {
 			return (prev += curr.quantity)
@@ -32,7 +62,13 @@ class DeckCreate extends React.Component {
 		this.setState({ totalCards: newTotalCards })
 	}
 
-	incrementCard(e, card) {
+	handleCardButtonKeyPress(e, card) {
+		if (e.key === 'Enter') {
+			this.incrementCard(card)
+		}
+	}
+
+	incrementCard(card) {
 		console.log(`You clicked on ${card.name}`)
 		const currentDeckCards = [...this.state.deckCards]
 		const existsIndex = currentDeckCards.findIndex(
@@ -43,12 +79,20 @@ class DeckCreate extends React.Component {
 		if (exists) {
 			// check if > 1, if so don't increment, warn
 			if (currentDeckCards[existsIndex].quantity > 1) {
-				alert(
-					`You can't add anymore of: ${currentDeckCards[existsIndex].name}`
-				)
-			} else if (currentDeckCards[existsIndex].rarity === 'LEGENDARY') {
-				alert('You can only have one of each legendary.')
-			} else {
+				this.notify({
+					type: toast.TYPE.ERROR,
+					message: `🙅🏼‍♂️ You can't add anymore of: ${currentDeckCards[existsIndex].name}`,
+				})
+			}
+			// also check if legendary, if it exists then the quantity is one, so don't increment, warn
+			else if (currentDeckCards[existsIndex].rarity === 'LEGENDARY') {
+				this.notify({
+					type: toast.TYPE.ERROR,
+					message: `🙅🏼‍♂️ 'You can only have one of each legendary.'`,
+				})
+			}
+			// else increment
+			else {
 				currentDeckCards[existsIndex].quantity++
 				this.setState({ deckCards: [...currentDeckCards] }, () =>
 					this.updateTotalCards()
@@ -61,6 +105,7 @@ class DeckCreate extends React.Component {
 					deckCards: [
 						...currentDeckCards,
 						{
+							id: card.id,
 							dbf_id: card.dbf_id,
 							quantity: 1,
 							name: card.name,
@@ -73,7 +118,7 @@ class DeckCreate extends React.Component {
 		}
 	}
 
-	decrementCard(e, card) {
+	decrementCard = (e, card) => {
 		console.log(`You clicked on ${card.name}`)
 		const currentDeckCards = [...this.state.deckCards]
 		const indexOfCardToDecrement = currentDeckCards.findIndex(dc => {
@@ -112,7 +157,10 @@ class DeckCreate extends React.Component {
 		// if sum of all cards is > 30
 
 		if (this.state.totalCards === 0) {
-			alert('you need to add at least one card!')
+			this.notify({
+				type: toast.TYPE.INFO,
+				message: `You need to add at least one card!`,
+			})
 			return
 		}
 
@@ -120,6 +168,12 @@ class DeckCreate extends React.Component {
 		this.context.addUserDeck(newDeck)
 		this.props.history.push(`/user/${this.context.user.username}/decks`)
 	}
+
+	notify = ({ type, message }) =>
+		toast(message, {
+			type,
+			position: toast.POSITION.BOTTOM_RIGHT,
+		})
 
 	render() {
 		const filteredCardHtml = this.state.filteredCards
@@ -133,10 +187,13 @@ class DeckCreate extends React.Component {
 					<img
 						key={card.dbf_id}
 						role="button"
-						width="150"
+						tabIndex="0"
+						aria-pressed="false"
+						className="card__result"
 						alt={`${card.name}`}
 						src={`https://s3.wasabisys.com/hearthstone/${card.dbf_id}.png`}
-						onClick={e => this.incrementCard(e, card)}
+						onClick={() => this.incrementCard(card)}
+						onKeyPress={e => this.handleCardButtonKeyPress(e, card)}
 					/>
 				)
 			})
@@ -154,62 +211,40 @@ class DeckCreate extends React.Component {
 		].map(hClass => {
 			return (
 				<div key={hClass}>
-					<input
-						type="radio"
-						name="deckClass"
-						aria-label={hClass}
-						value={hClass.toUpperCase()}
-						id={`deckClass-${hClass.toLowerCase()}`}
-						onChange={e =>
-							this.setState({ deckClass: e.target.value })
-						}
-						required
-					/>
-					<label htmlFor={`deckClass-${hClass.toLowerCase()}`}>
-						{hClass}
+					<label>
+						<input
+							type="radio"
+							name="deckClass"
+							aria-label={hClass}
+							value={hClass.toUpperCase()}
+							id={`deckClass-${hClass.toLowerCase()}`}
+							onChange={e =>
+								this.setState({ deckClass: e.target.value })
+							}
+							required
+						/>
+						<motion.img
+							src={HERO_PORTRAITS[hClass.toUpperCase() + '.jpg']}
+							alt={hClass}
+							width="125"
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 1.3 }}
+						/>
 					</label>
 				</div>
 			)
 		})
 
-		const deckCardsHTML = this.state.deckCards.map(dc => {
-			return (
-				<li key={dc.dbf_id}>
-					<button onClick={e => this.decrementCard(e, dc)}>
-						{dc.quantity}x {dc.name}
-					</button>
-				</li>
-			)
-		})
-
 		return (
 			<main className="create-deck">
-				<div className="inner">
-					<section>
-						<h1>Create Deck</h1>
-						<h2>Find Cards</h2>
-						<form id="cardSearch" onSubmit={this.createDeck}>
-							<input
-								name="cardQuery"
-								aria-label="Search for card"
-								type="text"
-								placeholder="Search for card"
-								value={this.state.cardSearchQuery}
-								onChange={e =>
-									this.setState({
-										cardSearchQuery: e.target.value,
-									})
-								}
-							/>
-							<div id="cardSearchResults">{filteredCardHtml}</div>
-						</form>
-					</section>
+				<h1>Create Deck</h1>
 
-					<section>
-						<h2>Deck Info</h2>
+				{!this.state.classSelected && (
+					<section className="select-class">
+						<h2>Step 1. Select a Class</h2>
 						<form
-							id="createDeck"
-							onSubmit={e => this.createDeck(e)}
+							id="selectClass"
+							onSubmit={e => this.selectClass(e)}
 						>
 							<fieldset>
 								<legend>Deck Class</legend>
@@ -217,54 +252,100 @@ class DeckCreate extends React.Component {
 									{_formRadios}
 								</div>
 							</fieldset>
-							<div>
-								<input
-									name="deckName"
-									aria-label="Deck Name"
-									type="text"
-									placeholder="Deck Name"
-									value={this.state.deckName}
-									onChange={e =>
-										this.setState({
-											deckName: e.target.value,
-										})
-									}
-									required
-									aria-required="true"
-								/>
-							</div>
-							<div>
-								<textarea
-									name="deckDescription"
-									aria-label="Deck Description"
-									placeholder="Deck Description"
-									value={this.state.deckDescription}
-									onChange={e =>
-										this.setState({
-											deckDescription: e.target.value,
-										})
-									}
-									required
-									aria-required="true"
-								></textarea>
-							</div>
-							<h3>Deck Cards</h3>
-							{this.state.deckCards.length > 0 && (
-								<ul>{deckCardsHTML}</ul>
-							)}
-							{this.state.deckCards.length === 0 && (
-								<p>No cards yet.</p>
-							)}
-							<p>
-								<strong>Total Cards:</strong>{' '}
-								{this.state.totalCards} / 30
-							</p>
-							<div>
-								<input type="submit" value="Create Deck" />
-							</div>
+							<motion.button
+								type="submit"
+								className="success"
+								whileTap={{ scale: 1.3 }}
+							>
+								Select Class
+							</motion.button>
 						</form>
 					</section>
-				</div>
+				)}
+				{this.state.classSelected && (
+					<div className="inner">
+						<section className="no-padding">
+							<h2>Find Cards</h2>
+							<form id="cardSearch" onSubmit={this.createDeck}>
+								<input
+									name="cardQuery"
+									aria-label="Search for card"
+									type="text"
+									placeholder="Search for card"
+									value={this.state.cardSearchQuery}
+									onChange={e =>
+										this.setState({
+											cardSearchQuery: e.target.value,
+										})
+									}
+								/>
+								<div id="cardSearchResults">
+									{filteredCardHtml}
+								</div>
+							</form>
+						</section>
+
+						<section>
+							<h2>Deck Info</h2>
+							<img
+								className="class-portrait"
+								src={
+									HERO_PORTRAITS[
+										this.state.deckClass.toUpperCase() +
+											'.jpg'
+									]
+								}
+								alt={this.state.deckClass}
+								width="125"
+							/>
+							<form
+								id="createDeck"
+								onSubmit={e => this.createDeck(e)}
+							>
+								<div>
+									<input
+										name="deckName"
+										aria-label="Deck Name"
+										type="text"
+										placeholder="Deck Name"
+										value={this.state.deckName}
+										onChange={e =>
+											this.setState({
+												deckName: e.target.value,
+											})
+										}
+										required
+										aria-required="true"
+									/>
+								</div>
+								<div>
+									<textarea
+										name="deckDescription"
+										aria-label="Deck Description"
+										placeholder="Deck Description"
+										value={this.state.deckDescription}
+										onChange={e =>
+											this.setState({
+												deckDescription: e.target.value,
+											})
+										}
+										required
+										aria-required="true"
+									></textarea>
+								</div>
+								<DeckCardList
+									cards={this.state.deckCards}
+									total={this.state.totalCards}
+									decrementCard={this.decrementCard}
+								/>
+								<div>
+									<input type="submit" value="Create Deck" />
+								</div>
+							</form>
+						</section>
+					</div>
+				)}
+				<ToastContainer autoclose={5000} />
 			</main>
 		)
 	}

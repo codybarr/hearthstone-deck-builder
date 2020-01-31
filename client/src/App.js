@@ -14,7 +14,7 @@ import DeckCreate from './routes/deck/DeckCreate'
 import DeckView from './routes/deck/DeckView'
 import NoMatch from './routes/NoMatch'
 
-import UserContext from './Context'
+import UserContext from './context/Context'
 import './App.css'
 import decks from './data/decks.fixture'
 import user from './data/user.fixture'
@@ -46,7 +46,6 @@ export default class App extends React.Component {
 	}
 
 	render() {
-		console.log({ userDecksAppJs: this.state.userDecks })
 		return (
 			<>
 				<UserContext.Provider value={this.state}>

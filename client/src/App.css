@@ -36,6 +36,10 @@ footer {
 	padding: 1.5rem; /* tailwind .p-6 */
 }
 
+section.no-padding {
+	padding: 0;
+}
+
 footer {
 	text-align: center;
 }
@@ -54,17 +58,29 @@ section:nth-child(even) {
 	padding-left: 1.25rem;
 }
 
+.content table {
+	margin: 1rem 0;
+	border: 1px solid black;
+}
+
+.content table thead {
+	background-color: #333333;
+	color: white;
+}
+
+.content table tr:not(:first-child) {
+	border-top: 1px solid black;
+}
+
 * + ul {
 	margin: 1rem 0;
 }
 
-.register,
 .create-deck,
 .view-deck {
 	background-color: #bbbbbb;
 }
 
-.register-inner,
 .create-deck-inner,
 .view-deck-inner {
 	max-width: 960px;
@@ -76,6 +92,7 @@ section:nth-child(even) {
 form {
 	display: inline-flex;
 	flex-direction: column;
+	align-items: flex-start;
 }
 
 form input[type='text'],
@@ -119,4 +136,37 @@ div.content p:not(:first-child) {
 	.flex > *:not(:first-child) {
 		margin-left: 1rem;
 	}
+}
+
+/* Buttons */
+button {
+	display: block;
+	padding: 0.5rem 1rem;
+	border: 1px solid transparent;
+	border-radius: 0.25rem;
+	transition: 200ms all ease-out;
+	/* cubic-bezier(0, 0, 0.2, 1); */
+}
+
+button:not(:last-child) {
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+button.primary {
+	background-color: #007bff;
+	color: white;
+}
+
+button.primary:hover {
+	background-color: #0069d9;
+}
+
+button.success {
+	background-color: #48c774;
+	color: white;
+}
+
+button.success:hover {
+	background-color: #3ec46d;
 }

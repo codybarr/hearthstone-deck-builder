@@ -1,29 +1,31 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+
+import './Home.css'
 
 function Home() {
+	const history = useHistory()
+
 	return (
 		<>
 			<header role="banner">
-				<h1>
-					Boom{' '}
-					<span role="img" aria-label="boom emoji">
-						💥
-					</span>{' '}
-					- Hearthstone Deck Builder!
-				</h1>
+				<h1>Hearthstone Deck Builder!</h1>
 				<p className="content">
-					Hi there, thanks for visiting my site. If you'd like to
-					learn how to use the app, please{' '}
-					<Link to="/demo">visit the demo</Link>
+					Welcome to the site. Let's kick things off by creating a
+					deck!
 				</p>
+				<button
+					className="primary"
+					onClick={() => history.push('/decks/create')}
+				>
+					Create Deck!
+				</button>
 			</header>
 			<section className="content">
-				<h2>Create Your Own Decks</h2>
+				<h2>Check out the Demo</h2>
 				<p>
-					Use our custom designed deck builder to craft your
-					hearthstone deck. You can do all sorts of things with your
-					decks after they're created:
+					Visit the <Link to="/demo">demo page</Link> for a survey on
+					the site's pages / features.
 				</p>
 				<ul>
 					<li>Share them with your friends</li>

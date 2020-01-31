@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import UserContext from '../../Context'
+import UserContext from '../../context/Context'
 
 import './DeckView.css'
 

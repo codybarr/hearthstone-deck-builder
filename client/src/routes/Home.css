@@ -1,0 +1,10 @@
+header[role='banner'] {
+	max-width: 960px;
+	margin: 1rem auto;
+	border-radius: 0.25rem;
+	background-color: #ccc;
+}
+
+header[role='banner'] button {
+	margin-top: 1rem;
+}

@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './Register.module.css'
 
 function Register() {
 	return (
-		<main className="register">
+		<main className={styles.register}>
 			<div className="register-inner">
 				<h1>Register</h1>
 				<form>

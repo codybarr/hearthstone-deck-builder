@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import UserContext from '../../Context'
+import UserContext from '../../context/Context'
 
-import DeckCard from '../../components/deck/DeckCard'
+import DeckTab from '../../components/deck/DeckTab'
 
 import './UserDecks.css'
 
@@ -12,7 +12,7 @@ function UserDecks() {
 	console.log({ UserDecksView: userDecks })
 
 	const userDecksHTML = userDecks.map(deck => {
-		return <DeckCard key={deck.id} deck={deck} />
+		return <DeckTab key={deck.id} deck={deck} />
 	})
 
 	return (

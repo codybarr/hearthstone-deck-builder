@@ -1,9 +1,87 @@
-nav {
+.burger-wrapper {
+	position: relative;
+	z-index: 201;
+	width: 60px;
+	height: 60px;
+	padding: 15px;
+	-webkit-flex-direction: column;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: end;
+	-webkit-align-items: flex-end;
+	-ms-flex-align: end;
+	align-items: flex-end;
+	cursor: pointer;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	margin-left: auto;
+}
+
+.burger-wrapper .line-1 {
+	width: 27px;
+	height: 2px;
+	background-color: white;
+
+	transform-style: preserve-3d;
+	transition: transform 200ms ease 0s;
+	transform: translateX(0px) translateY(7px) translateZ(0px) rotateX(0deg)
+		rotateY(0deg) rotateZ(45deg);
+}
+
+.burger-wrapper .line-2 {
+	width: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	height: 2px;
+	background-color: white;
+
+	transition: opacity 200ms ease 0s, width 200ms ease 0s;
+	opacity: 0;
+	width: 0px;
+}
+
+.burger-wrapper .line-3 {
+	width: 27px;
+	height: 2px;
+	background-color: white;
+
+	transform-style: preserve-3d;
+	transition: transform 200ms ease 0s;
+	transform: translateX(0px) translateY(-7px) translateZ(0px) rotateX(0deg)
+		rotateY(0deg) rotateZ(-45deg);
+}
+
+.burger-wrapper.closed .line-1 {
+	transform-style: preserve-3d;
+	transition: transform 200ms ease 0s;
+	transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg)
+		rotateY(0deg) rotateZ(0deg);
+}
+
+.burger-wrapper.closed .line-2 {
+	transition: opacity 200ms ease 0s, width 200ms ease 0s;
+	opacity: 1;
+	width: 24px;
+}
+
+.burger-wrapper.closed .line-3 {
+	transform-style: preserve-3d;
+	transition: transform 200ms ease 0s;
+	transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg)
+		rotateY(0deg) rotateZ(0deg);
+}
+
+nav {
 	color: white;
 	background-color: #666666;
+}
+
+nav .main {
+	display: flex;
+	align-items: center;
 	padding: 0.5rem 1rem;
 }
 
@@ -21,16 +99,24 @@ nav .logo-wrapper strong {
 	margin-left: 1rem;
 }
 
-nav ul {
-	display: flex;
-	margin-top: 0;
+ul.nav-items {
+	padding: 1rem 0;
+	display: none;
 }
 
-nav ul li {
-	padding-right: 1rem;
-}
-
-nav a,
-nav a:link {
+.nav-items li a {
 	color: white;
+	border-radius: 0.25rem;
+	margin-left: 1rem;
+	display: inline-block;
+	padding: 0.5rem 1rem;
+}
+
+.nav-items li a:hover {
+	color: gray;
+	background-color: white;
+}
+
+.isOpen .nav-items {
+	display: block;
 }

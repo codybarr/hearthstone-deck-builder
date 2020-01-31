@@ -1,0 +1,47 @@
+.deckCardItem {
+	display: flex;
+	align-items: center;
+	background-color: black;
+	color: white;
+	margin: 0 0 3px 0;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	width: 100%;
+}
+
+.deckCardItem:hover {
+	opacity: 0.7;
+}
+
+.cardQuantity {
+	background-color: blue;
+	color: white;
+	font-family: monospace;
+	padding: 0.25rem 0.5rem;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+}
+
+.cardName {
+	margin-left: 0.5rem;
+	white-space: nowrap;
+	align-self: stretch;
+	display: flex;
+	align-items: center;
+	padding: 0.5rem 0;
+}
+
+.cardTile {
+	margin-left: auto;
+	background-repeat: no-repeat;
+	background-position: right;
+	width: 200px;
+	background-image: linear-gradient(black 0%, black 10%, transparent 100%);
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: contain;
+	align-self: stretch;
+	height: auto;
+}
